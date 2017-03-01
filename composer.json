@@ -11,10 +11,10 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
-    "yiisoft/yii2": "*",
-    "yiisoft/yii2-imagine": "*",
-    "pendalf89/yii2-tinymce": "*",
-    "2amigos/yii2-file-upload-widget": "*"
+    "yiisoft/yii2-imagine": "~2.1",
+    "yeesoft/yii2-yee-core": "~0.1.0",
+    "tinymce/tinymce": "~4.5.0",
+    "2amigos/yii2-file-upload-widget": "~1.0.6"
   },
   "autoload": {
     "psr-4": {

@@ -2,14 +2,15 @@
 
 namespace yeesoft\media\widgets;
 
-use pendalf89\tinymce\TinyMce as TinyMceWidget;
 use yeesoft\media\assets\FileInputAsset;
 use yii\helpers\Url;
 use yii\web\JsExpression;
 use yii\widgets\InputWidget;
+use yeesoft\media\assets\TinyMceAsset;
 
 class TinyMce extends InputWidget
 {
+
     /**
      * @var string Optional, if set, only this image can be selected by user
      */
@@ -39,11 +40,6 @@ class TinyMce extends InputWidget
     ];
 
     /**
-     * @var string TinyMCE widget
-     */
-    private $tinyMCE = '';
-
-    /**
      * @inheritdoc
      */
     public function init()
@@ -52,7 +48,7 @@ class TinyMce extends InputWidget
 
         if (empty($this->clientOptions['file_picker_callback'])) {
             $this->clientOptions['file_picker_callback'] = new JsExpression(
-                'function(callback, value, meta) {
+                    'function(callback, value, meta) {
                     mediaTinyMCE(callback, value, meta);
                 }'
             );
@@ -65,14 +61,6 @@ class TinyMce extends InputWidget
         if (empty($this->clientOptions['convert_urls'])) {
             $this->clientOptions['convert_urls'] = false;
         }
-
-        $this->tinyMCE = TinyMceWidget::widget([
-            'name' => $this->name,
-            'model' => $this->model,
-            'attribute' => $this->attribute,
-            'clientOptions' => $this->clientOptions,
-            'options' => $this->options,
-        ]);
     }
 
     /**
@@ -80,23 +68,48 @@ class TinyMce extends InputWidget
      */
     public function run()
     {
+        if ($this->hasModel()) {
+            $output = Html::activeTextarea($this->model, $this->attribute, $this->options);
+        } else {
+            $output = Html::textarea($this->name, $this->value, $this->options);
+        }
+
+        $this->registerClientScript();
+
+        $modal = $this->renderFile('@vendor/yeesoft/yii2-yee-media/views/manage/modal.php', [
+            'inputId' => $this->options['id'],
+            'btnId' => $this->options['id'] . '-btn',
+            'frameId' => $this->options['id'] . '-frame',
+            'frameSrc' => Url::to(['/media/manage']),
+            'thumb' => $this->thumb,
+        ]);
+
+        return $output . $modal;
+    }
+
+    /**
+     * Registers client scripts
+     */
+    protected function registerClientScript()
+    {
+        TinyMceAsset::register($this->view);
         FileInputAsset::register($this->view);
+
+        $js = [];
+        $id = $this->options['id'];
+
+        $this->clientOptions['selector'] = "#{$id}";
+
+        $options = Json::encode($this->clientOptions);
+        $js[] = "tinymce.init($options);";
+
+        $this->view->registerJs(implode("\n", $js));
 
         if (!empty($this->callbackBeforeInsert)) {
             $this->view->registerJs('
                 $("#' . $this->options['id'] . '").on("fileInsert", ' . $this->callbackBeforeInsert . ');'
             );
         }
-
-        $modal = $this->renderFile('@vendor/yeesoft/yii2-yee-media/views/manage/modal.php',
-            [
-                'inputId' => $this->options['id'],
-                'btnId' => $this->options['id'] . '-btn',
-                'frameId' => $this->options['id'] . '-frame',
-                'frameSrc' => Url::to(['/media/manage']),
-                'thumb' => $this->thumb,
-            ]);
-
-        return $this->tinyMCE . $modal;
     }
+
 }
