@@ -3,6 +3,8 @@
 namespace yeesoft\media\widgets;
 
 use yeesoft\media\assets\FileInputAsset;
+use yeesoft\helpers\Html;
+use yii\helpers\Json;
 use yii\helpers\Url;
 use yii\web\JsExpression;
 use yii\widgets\InputWidget;
