@@ -3,7 +3,6 @@
 namespace yeesoft\media\controllers;
 
 use yeesoft\controllers\admin\BaseController;
-use Yii;
 
 /**
  * AlbumController implements the CRUD actions for yeesoft\media\models\Album model.

@@ -1,29 +1,23 @@
 <?php
 
-use yeesoft\assets\LanguagePillsAsset;
-use yeesoft\media\assets\ModalAsset;
 use yii\helpers\Html;
+use yeesoft\media\widgets\Gallery;
+use yeesoft\media\assets\ModalAsset;
 
 /* @var $this yii\web\View */
 
 $this->title = Yii::t('yee/media', 'Media');
 $this->params['breadcrumbs'][] = $this->title;
 
-ModalAsset::register($this);
-LanguagePillsAsset::register($this);
+$this->params['description'] = 'YeeCMS 0.2.0';
+$this->params['header-content'] = Html::a(Yii::t('yee/media', 'Manage Albums'), ['album/index'], ['class' => 'btn btn-sm btn-primary']);
 
+ModalAsset::register($this);
 ?>
 
-<div class="media-index">
-
-    <div class="row">
-        <div class="col-sm-12">
-            <h3 class="lte-hide-title page-title"><?= Html::encode($this->title) ?></h3>
-            <?= Html::a(Yii::t('yee/media', 'Manage Albums'), ['/media/album/index'], ['class' => 'btn btn-sm btn-primary']) ?>
-        </div>
+<div class="box box-primary">
+    <div class="box-body">
+        <?= Gallery::widget() ?>
     </div>
-
-    <?= yeesoft\media\widgets\Gallery::widget() ?>
-
 </div>
 

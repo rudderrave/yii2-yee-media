@@ -11,6 +11,7 @@ use yii\data\ActiveDataProvider;
  */
 class CategorySearch extends Category
 {
+
     /**
      * @inheritdoc
      */
@@ -29,6 +30,14 @@ class CategorySearch extends Category
     {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function formName()
+    {
+        return '';
     }
 
     /**
@@ -70,9 +79,10 @@ class CategorySearch extends Category
         ]);
 
         $query->andFilterWhere(['like', 'slug', $this->slug])
-            ->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description]);
+                ->andFilterWhere(['like', 'title', $this->title])
+                ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }
+
 }

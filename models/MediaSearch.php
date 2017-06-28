@@ -10,6 +10,7 @@ use yii\data\ActiveDataProvider;
  */
 class MediaSearch extends Media
 {
+
     /**
      * @inheritdoc
      */
@@ -28,6 +29,14 @@ class MediaSearch extends Media
     {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function formName()
+    {
+        return '';
     }
 
     /**
@@ -65,9 +74,10 @@ class MediaSearch extends Media
 
 
         $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['>=', 'created_at', strtotime($this->created_at)])
-            ->andFilterWhere(['<=', 'created_at', strtotime($this->created_at . ' 23:59:59')]);
+                ->andFilterWhere(['>=', 'created_at', strtotime($this->created_at)])
+                ->andFilterWhere(['<=', 'created_at', strtotime($this->created_at . ' 23:59:59')]);
 
         return $dataProvider;
     }
+
 }

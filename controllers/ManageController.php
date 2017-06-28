@@ -119,7 +119,7 @@ class ManageController extends BaseController
                 $message = Yii::t('yee/media', "Changes have been saved.");
             }
 
-            Yii::$app->session->setFlash('mediaUpdateResult', $message);
+            Yii::$app->session->setFlash('success', $message);
         } else {
             die(Yii::t('yii', 'You are not allowed to perform this action.'));
         }

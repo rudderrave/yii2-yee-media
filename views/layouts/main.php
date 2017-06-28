@@ -9,6 +9,8 @@ use yii\helpers\Html;
 LanguagePillsAsset::register($this);
 MediaAsset::register($this);
 
+$this->registerCss('html {overflow:hidden !important;}');
+
 ?>
 <?php $this->beginPage() ?>
     <!DOCTYPE html>

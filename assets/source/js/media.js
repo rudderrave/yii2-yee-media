@@ -30,7 +30,7 @@ $(document).ready(function () {
             ajaxRequest = null;
         }
 
-        $(".item a").removeClass("active");
+        $(".media-list .media-item a").removeClass("active");
         $(this).addClass("active");
 
         var id = $(this).attr("data-key"),

@@ -11,6 +11,7 @@ use yii\data\ActiveDataProvider;
  */
 class AlbumSearch extends Album
 {
+
     /**
      * @inheritdoc
      */
@@ -29,6 +30,14 @@ class AlbumSearch extends Album
     {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function formName()
+    {
+        return '';
     }
 
     /**
@@ -71,9 +80,10 @@ class AlbumSearch extends Album
         ]);
 
         $query->andFilterWhere(['like', 'slug', $this->slug])
-            ->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description]);
+                ->andFilterWhere(['like', 'title', $this->title])
+                ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }
+
 }

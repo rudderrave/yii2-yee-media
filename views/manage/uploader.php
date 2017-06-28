@@ -13,14 +13,15 @@ if ($mode !== 'modal') {
 }
 ?>
 
-<div class="panel panel-default">
-    <div class="panel-body">
+<div class="box box-primary">
+    <div class="box-body">
         <div id="uploadmanager">
             <p>
                 <?= Html::a('← ' . Yii::t('yee/media', 'Back to file manager'), ($mode == 'modal') ? ['manage/index', 'mode' => 'modal'] : ['default/index']) ?>
             </p>
 
-            <?= FileUploadUI::widget([
+            <?=
+            FileUploadUI::widget([
                 'model' => $model,
                 'attribute' => 'file',
                 'formView' => '@vendor/yeesoft/yii2-yee-media/views/upload-widget/form',
@@ -31,8 +32,8 @@ if ($mode !== 'modal') {
                 ],
                 'url' => ['upload'],
                 'gallery' => false,
-            ]) ?>
-
+            ])
+            ?>
         </div>
     </div>
 </div>

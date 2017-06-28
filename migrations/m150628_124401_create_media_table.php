@@ -19,8 +19,6 @@ class m150628_124401_create_media_table extends yii\db\Migration
         $this->createTable(self::CATEGORY_TABLE, [
             'id' => $this->primaryKey(),
             'slug' => $this->string(255)->notNull(),
-            'title' => $this->string(255)->notNull(),
-            'description' => $this->text(),
             'visible' => $this->integer()->notNull()->defaultValue(1)->comment('0-hidden,1-visible'),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
@@ -47,9 +45,7 @@ class m150628_124401_create_media_table extends yii\db\Migration
         $this->createTable(self::ALBUM_TABLE, [
             'id' => $this->primaryKey(),
             'category_id' => $this->integer(),
-            'title' => $this->string(255)->notNull(),
             'slug' => $this->string(255)->notNull(),
-            'description' => $this->text(),
             'visible' => $this->integer()->notNull()->defaultValue(1)->comment('0-hidden,1-visible'),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),

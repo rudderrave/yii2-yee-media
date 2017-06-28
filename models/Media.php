@@ -2,19 +2,20 @@
 
 namespace yeesoft\media\models;
 
-use omgdef\multilingual\MultilingualQuery;
-use yeesoft\behaviors\MultilingualBehavior;
-use yeesoft\media\MediaModule;
-use yeesoft\models\OwnerAccess;
-use yeesoft\models\User;
 use Yii;
-use yii\behaviors\BlameableBehavior;
-use yii\behaviors\TimestampBehavior;
-use yeesoft\db\ActiveRecord;
 use yii\helpers\Html;
+use yii\web\UploadedFile;
 use yii\helpers\Inflector;
 use yii\imagine\Image as Imagine;
-use yii\web\UploadedFile;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yeesoft\models\User;
+use yeesoft\db\ActiveRecord;
+use yeesoft\media\MediaModule;
+use yeesoft\models\OwnerAccess;
+use yeesoft\behaviors\MultilingualBehavior;
+use yeesoft\multilingual\db\MultilingualQuery;
+use yeesoft\multilingual\db\MultilingualLabelsTrait;
 
 /**
  * This is the model class for table "media".
@@ -36,6 +37,9 @@ use yii\web\UploadedFile;
  */
 class Media extends ActiveRecord implements OwnerAccess
 {
+
+    use MultilingualLabelsTrait;
+
     public $file;
     public static $imageFileTypes = ['image/gif', 'image/jpeg', 'image/png'];
 
@@ -94,8 +98,7 @@ class Media extends ActiveRecord implements OwnerAccess
             TimestampBehavior::className(),
             'multilingual' => [
                 'class' => MultilingualBehavior::className(),
-                'langForeignKey' => 'media_id',
-                'tableName' => "{{%media_lang}}",
+                'languageForeignKey' => 'media_id',
                 'attributes' => [
                     'title', 'description', 'alt',
                 ]
@@ -168,7 +171,8 @@ class Media extends ActiveRecord implements OwnerAccess
                 $filename = Inflector::slug($this->file->baseName) . '.' . $this->file->extension;
             else {
                 //if we don't want to rename we finish the call here
-                if ($rename == false) return false;
+                if ($rename == false)
+                    return false;
                 $filename = Inflector::slug($this->file->baseName) . $counter . '.' . $this->file->extension;
             }
             $url = "$structure/$filename";
@@ -246,7 +250,6 @@ class Media extends ActiveRecord implements OwnerAccess
         Imagine::thumbnail("$basePath/{$this->url}", $width, $height)->save("$basePath/$thumbUrl");
     }
 
-
     /**
      * @return bool if type of this media file is image, return true;
      */
@@ -259,7 +262,7 @@ class Media extends ActiveRecord implements OwnerAccess
      * @param $baseUrl
      * @return string default thumbnail for image
      */
-    public function getDefaultThumbUrl($baseUrl = '')
+    public function getDefaultThumbUrl()
     {
         if ($this->isImage()) {
             $size = MediaModule::getDefaultThumbSize();
@@ -273,7 +276,23 @@ class Media extends ActiveRecord implements OwnerAccess
             return "$dirname/$filename-{$width}x{$height}.$extension";
         }
 
-        return "$baseUrl/images/picture.png";
+        return false;
+    }
+
+    /**
+     * @param $baseUrl
+     * @return string default thumbnail for image
+     */
+    public function getThumbnail($baseUrl = '')
+    {
+        //return '';
+        if ($this->isImage()) {
+            return Html::img($this->getDefaultThumbUrl(), ['class' => 'image-thumbnail']);
+        }
+        return '<div class="file-thumbnail">'
+                . '<i class="fa fa-file-image-o fa-4x" aria-hidden="true"></i>'
+                . '<h6>Some_Adobe_Photoshop_File_name.psd</h6>'
+                . '</div>';
     }
 
     /**
@@ -470,4 +489,5 @@ class Media extends ActiveRecord implements OwnerAccess
     {
         return $this->hasOne(Album::className(), ['id' => 'album_id']);
     }
+
 }

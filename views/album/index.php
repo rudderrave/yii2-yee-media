@@ -15,63 +15,48 @@ use yii\widgets\Pjax;
 $this->title = Yii::t('yee/media', 'Albums');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('yee/media', 'Media'), 'url' => ['/media/default/index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$this->params['description'] = 'YeeCMS 0.2.0';
+$this->params['header-content'] = Html::a(Yii::t('yee', 'Add New'), ['create'], ['class' => 'btn btn-sm btn-primary']) . ' '
+        . Html::a(Yii::t('yee/media', 'Manage Categories'), ['category/index'], ['class' => 'btn btn-sm btn-primary']);
 ?>
-<div class="album-index">
 
-    <div class="row">
-        <div class="col-sm-12">
-            <h3 class="lte-hide-title page-title"><?= Html::encode($this->title) ?></h3>
-            <?= Html::a(Yii::t('yee', 'Add New'), ['/media/album/create'], ['class' => 'btn btn-sm btn-primary']) ?>
-            <?= Html::a(Yii::t('yee/media', 'Manage Categories'), ['/media/category/index'], ['class' => 'btn btn-sm btn-primary']) ?>
-        </div>
-    </div>
-
-    <div class="panel panel-default">
-        <div class="panel-body">
-
-            <div class="row">
-                <div class="col-sm-12 text-right">
-                    <?= GridPageSize::widget(['pjaxId' => 'album-grid-pjax']) ?>
-                </div>
-            </div>
-
-            <?php Pjax::begin(['id' => 'album-grid-pjax']) ?>
-
-            <?= GridView::widget([
-                'id' => 'album-grid',
-                'dataProvider' => $dataProvider,
-                'filterModel' => $searchModel,
-                'bulkActionOptions' => [
-                    'gridId' => 'album-grid',
-                    'actions' => [Url::to(['bulk-delete']) => Yii::t('yee', 'Delete')],
+<div class="box box-primary">
+    <div class="box-body">
+        <?php $pjax = Pjax::begin() ?>
+        <?=
+        GridView::widget([
+            'pjaxId' => $pjax->id,
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'quickFilters' => false,
+            'columns' => [
+                ['class' => 'yeesoft\grid\CheckboxColumn', 'options' => ['style' => 'width:10px'], 'displayFilter' => false],
+                [
+                    'class' => 'yeesoft\grid\columns\TitleActionColumn',
+                    'controller' => '/media/album',
+                    'title' => function (Album $model) {
+                        return Html::a($model->title, ['/media/album/update', 'id' => $model->id], ['data-pjax' => 0]);
+                    },
+                    'buttonsTemplate' => '{update} {delete}',
+                    'filterOptions' => ['colspan' => 2],
                 ],
-                'columns' => [
-                    ['class' => 'yeesoft\grid\CheckboxColumn', 'options' => ['style' => 'width:10px']],
-                    [
-                        'class' => 'yeesoft\grid\columns\TitleActionColumn',
-                        'controller' => '/media/album',
-                        'title' => function (Album $model) {
-                            return Html::a($model->title, ['/media/album/update', 'id' => $model->id], ['data-pjax' => 0]);
-                        },
-                        'buttonsTemplate' => '{update} {delete}',
-                    ],
-                    'description:ntext',
-                    [
-                        'attribute' => 'category_id',
-                        'filter' => Category::getCategories(true),
-                        'value' => function (Album $model) {
-                            return ($model->category instanceof Category) ? $model->category->title : Yii::t('yii', '(not set)');
-                        },
-                        'format' => 'raw',
-                    ],
-                    [
-                        'class' => 'yeesoft\grid\columns\StatusColumn',
-                        'attribute' => 'visible',
-                    ],
+                'description:ntext',
+                [
+                    'attribute' => 'category_id',
+                    'filter' => Category::getCategories(true),
+                    'value' => function (Album $model) {
+                        return ($model->category instanceof Category) ? $model->category->title : Yii::t('yii', '(not set)');
+                    },
+                    'format' => 'raw',
                 ],
-            ]); ?>
-
-            <?php Pjax::end() ?>
-        </div>
+                [
+                    'class' => 'yeesoft\grid\columns\StatusColumn',
+                    'attribute' => 'visible',
+                ],
+            ],
+        ])
+        ?>
+<?php Pjax::end() ?>
     </div>
 </div>

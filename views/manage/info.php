@@ -5,7 +5,6 @@ use yeesoft\media\assets\MediaAsset;
 use yeesoft\media\models\Album;
 use yeesoft\models\User;
 use yeesoft\widgets\ActiveForm;
-use yeesoft\widgets\LanguagePills;
 use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
@@ -16,19 +15,28 @@ $bundle = MediaAsset::register($this);
 $mode = Yii::$app->getRequest()->get('mode', 'normal');
 ?>
 
-<?php if (Yii::$app->session->hasFlash('mediaUpdateResult')): ?>
-    <div class="alert alert-info alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <?= Yii::$app->session->getFlash('mediaUpdateResult') ?>
-    </div><br/>
-<?php endif; ?>
+<?php foreach (Yii::$app->session->getAllFlashes() as $key => $message) : ?>
+    <script type="text/javascript"><?= "Notification.show('{$key}', '{$message}');" ?></script>
+<?php endforeach ?>
 
-<?php if ($model->isMultilingual() && ($mode !== 'modal')): ?>
-    <?= LanguagePills::widget() ?>
-<?php endif; ?>
-    <div class="clearfix"></div>
+<?php
+$form = ActiveForm::begin([
+            'action' => ['/media/manage/update', 'id' => $model->id],
+            'options' => ['id' => 'control-form'],
+        ]);
+?>
+<div class="row">
+    <div class="col-md-6">
+        <h5><?= Yii::t('yee/media', 'Media Details') ?>:</h5>
+    </div>
+    <div class="col-md-6">
+        <?php if ($mode !== 'modal'): ?>
+            <?= $form->languageSwitcher($model); ?>
+        <?php endif; ?>
+    </div>
+</div>
+
+<div class="clearfix"></div>
 
 <?php if ($mode !== 'modal'): ?>
     <div class="clearfix">
@@ -50,18 +58,13 @@ $mode = Yii::$app->getRequest()->get('mode', 'normal');
     </div>
 <?php endif; ?>
 
-<?php
-$form = ActiveForm::begin([
-    'action' => ['/media/manage/update', 'id' => $model->id],
-    'options' => ['id' => 'control-form'],
-]);
-?>
 
-<?php /*echo $form->field($model, 'url')->textInput([
-    'class' => 'form-control input-sm',
-    'readonly' => 'readonly',
-    'value' => Yii::$app->urlManager->hostInfo . $model->url,
-]);*/ ?>
+
+<?php /* echo $form->field($model, 'url')->textInput([
+  'class' => 'form-control input-sm',
+  'readonly' => 'readonly',
+  'value' => Yii::$app->urlManager->hostInfo . $model->url,
+  ]); */ ?>
 
 <?php if ($mode !== 'modal'): ?>
 

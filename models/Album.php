@@ -2,15 +2,16 @@
 
 namespace yeesoft\media\models;
 
-use omgdef\multilingual\MultilingualQuery;
-use yeesoft\behaviors\MultilingualBehavior;
-use yeesoft\models\OwnerAccess;
 use Yii;
+use yii\helpers\ArrayHelper;
+use yeesoft\db\ActiveRecord;
+use yeesoft\models\OwnerAccess;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
-use yeesoft\db\ActiveRecord;
-use yii\helpers\ArrayHelper;
+use yeesoft\behaviors\MultilingualBehavior;
+use yeesoft\multilingual\db\MultilingualQuery;
+use yeesoft\multilingual\db\MultilingualLabelsTrait;
 
 /**
  * This is the model class for table "media_album".
@@ -28,6 +29,8 @@ use yii\helpers\ArrayHelper;
  */
 class Album extends ActiveRecord implements OwnerAccess
 {
+
+    use MultilingualLabelsTrait;
 
     /**
      * @inheritdoc
@@ -75,8 +78,7 @@ class Album extends ActiveRecord implements OwnerAccess
             ],
             'multilingual' => [
                 'class' => MultilingualBehavior::className(),
-                'langForeignKey' => 'media_album_id',
-                'tableName' => "{{%media_album_lang}}",
+                'languageForeignKey' => 'media_album_id',
                 'attributes' => [
                     'title', 'description',
                 ]
@@ -168,4 +170,5 @@ class Album extends ActiveRecord implements OwnerAccess
     {
         return 'created_by';
     }
+
 }
