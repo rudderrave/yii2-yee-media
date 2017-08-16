@@ -2,7 +2,7 @@
 
 namespace yeesoft\media\controllers;
 
-use yeesoft\controllers\admin\BaseController;
+use yeesoft\controllers\CrudController;
 use yeesoft\media\assets\MediaAsset;
 use yeesoft\media\models\Media;
 use yeesoft\models\User;
@@ -12,7 +12,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\Response;
 
-class ManageController extends BaseController
+class ManageController extends CrudController
 {
     public $modelClass = 'yeesoft\media\models\Media';
 

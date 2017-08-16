@@ -2,12 +2,12 @@
 
 namespace yeesoft\media\controllers;
 
-use yeesoft\controllers\admin\BaseController;
+use yeesoft\controllers\CrudController;
 
 /**
  * AlbumController implements the CRUD actions for yeesoft\media\models\Album model.
  */
-class AlbumController extends BaseController
+class AlbumController extends CrudController
 {
     public $modelClass = 'yeesoft\media\models\Album';
     public $modelSearchClass = 'yeesoft\media\models\AlbumSearch';

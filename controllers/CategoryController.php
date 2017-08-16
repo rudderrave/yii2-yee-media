@@ -2,12 +2,12 @@
 
 namespace yeesoft\media\controllers;
 
-use yeesoft\controllers\admin\BaseController;
+use yeesoft\controllers\CrudController;
 
 /**
  * CategoryController implements the CRUD actions for yeesoft\media\models\Category model.
  */
-class CategoryController extends BaseController
+class CategoryController extends CrudController
 {
     public $modelClass = 'yeesoft\media\models\Category';
     public $modelSearchClass = 'yeesoft\media\models\CategorySearch';

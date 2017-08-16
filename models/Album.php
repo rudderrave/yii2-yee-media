@@ -60,7 +60,8 @@ class Album extends ActiveRecord implements OwnerAccess
             [['category_id', 'title'], 'required'],
             [['created_by', 'updated_by', 'created_at', 'updated_at', 'category_id', 'visible'], 'integer'],
             [['description'], 'string'],
-            [['slug', 'title'], 'string', 'max' => 255]
+            [['slug', 'title'], 'string', 'max' => 255],
+            [['slug'], 'unique'],
         ];
     }
 
@@ -75,6 +76,7 @@ class Album extends ActiveRecord implements OwnerAccess
             'sluggable' => [
                 'class' => SluggableBehavior::className(),
                 'attribute' => 'title',
+                'ensureUnique' => true,
             ],
             'multilingual' => [
                 'class' => MultilingualBehavior::className(),

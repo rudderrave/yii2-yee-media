@@ -19,7 +19,7 @@ use yeesoft\media\models\Category;
 
                 <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'slug')->slugInput(['maxlength' => true], 'title') ?>
 
                 <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
             </div>

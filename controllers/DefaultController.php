@@ -2,9 +2,9 @@
 
 namespace yeesoft\media\controllers;
 
-use yeesoft\controllers\admin\BaseController;
+use yeesoft\controllers\CrudController;
 
-class DefaultController extends BaseController
+class DefaultController extends CrudController
 {
 
     public $disabledActions = ['view', 'create', 'update', 'delete', 'toggle-attribute',

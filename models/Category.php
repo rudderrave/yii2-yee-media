@@ -60,6 +60,7 @@ class Category extends ActiveRecord implements OwnerAccess
             [['created_by', 'updated_by', 'created_at', 'updated_at', 'visible'], 'integer'],
             [['description'], 'string'],
             [['slug', 'title'], 'string', 'max' => 255],
+            [['slug'], 'unique'],
         ];
     }
 
@@ -74,6 +75,7 @@ class Category extends ActiveRecord implements OwnerAccess
             'sluggable' => [
                 'class' => SluggableBehavior::className(),
                 'attribute' => 'title',
+                'ensureUnique' => true,
             ],
             'multilingual' => [
                 'class' => MultilingualBehavior::className(),
