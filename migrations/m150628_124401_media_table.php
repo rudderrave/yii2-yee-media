@@ -1,6 +1,6 @@
 <?php
 
-class m150628_124401_create_media_table extends yii\db\Migration
+class m150628_124401_media_table extends yii\db\Migration
 {
     const MEDIA_TABLE = '{{%media}}';
     const MEDIA_LANG_TABLE = '{{%media_lang}}';
@@ -8,6 +8,7 @@ class m150628_124401_create_media_table extends yii\db\Migration
     const CATEGORY_LANG_TABLE = '{{%media_category_lang}}';
     const ALBUM_TABLE = '{{%media_album}}';
     const ALBUM_LANG_TABLE = '{{%media_album_lang}}';
+    const MEDIA_UPLOAD_TABLE = '{{%media_upload}}';
     
     public function up()
     {
@@ -98,10 +99,24 @@ class m150628_124401_create_media_table extends yii\db\Migration
         ], $tableOptions);
         $this->createIndex('media_lang_language', self::MEDIA_LANG_TABLE, 'language');
         $this->addForeignKey('fk_media_lang', self::MEDIA_LANG_TABLE, 'media_id', self::MEDIA_TABLE, 'id', 'CASCADE', 'CASCADE');
+        
+        $this->createTable(self::MEDIA_UPLOAD_TABLE, [
+            'id' => $this->primaryKey(),
+            'media_id' => $this->integer()->notNull(),
+            'owner_class' => $this->string(255)->notNull(),
+            'owner_id' => $this->integer()->notNull(),
+        ], $tableOptions);
+
+        $this->createIndex('media_upload_owner_class', self::MEDIA_UPLOAD_TABLE, ['owner_class']);
+        $this->createIndex('media_upload_owner_id', self::MEDIA_UPLOAD_TABLE, ['owner_id']);
+        $this->addForeignKey('fk_media_upload_media_id', self::MEDIA_UPLOAD_TABLE, 'media_id', self::MEDIA_TABLE, 'id', 'CASCADE');
     }
 
     public function down()
     {
+        $this->dropForeignKey('fk_media_upload_media_id', self::MEDIA_UPLOAD_TABLE);
+        $this->dropTable(self::MEDIA_UPLOAD_TABLE);
+        
         $this->dropForeignKey('fk_media_created_by', self::MEDIA_TABLE);
         $this->dropForeignKey('fk_media_updated_by', self::MEDIA_TABLE);
         $this->dropForeignKey('fk_media_category_created_by', self::CATEGORY_TABLE);

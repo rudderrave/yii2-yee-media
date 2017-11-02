@@ -12,7 +12,6 @@ use yii\behaviors\TimestampBehavior;
 use yeesoft\models\User;
 use yeesoft\db\ActiveRecord;
 use yeesoft\media\MediaModule;
-use yeesoft\models\OwnerAccess;
 use yeesoft\behaviors\MultilingualBehavior;
 use yeesoft\multilingual\db\MultilingualQuery;
 use yeesoft\multilingual\db\MultilingualLabelsTrait;
@@ -35,7 +34,7 @@ use yeesoft\multilingual\db\MultilingualLabelsTrait;
  * @property integer $created_by
  * @property integer $updated_by
  */
-class Media extends ActiveRecord implements OwnerAccess
+class Media extends ActiveRecord
 {
 
     use MultilingualLabelsTrait;

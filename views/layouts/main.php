@@ -1,12 +1,10 @@
 <?php
 
-use yeesoft\assets\LanguagePillsAsset;
 use yeesoft\media\assets\MediaAsset;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 
-LanguagePillsAsset::register($this);
 MediaAsset::register($this);
 
 $this->registerCss('html {overflow:hidden !important;}');

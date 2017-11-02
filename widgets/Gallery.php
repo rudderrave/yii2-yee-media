@@ -3,7 +3,6 @@
 namespace yeesoft\media\widgets;
 
 use yeesoft\helpers\YeeHelper;
-use yeesoft\models\OwnerAccess;
 use yeesoft\models\User;
 use Yii;
 use yii\helpers\StringHelper;

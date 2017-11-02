@@ -5,7 +5,6 @@ namespace yeesoft\media\models;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yeesoft\db\ActiveRecord;
-use yeesoft\models\OwnerAccess;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -26,7 +25,7 @@ use yeesoft\multilingual\db\MultilingualLabelsTrait;
  * @property integer $created_by
  * @property integer $updated_by
  */
-class Category extends ActiveRecord implements OwnerAccess
+class Category extends ActiveRecord
 {
 
     use MultilingualLabelsTrait;
