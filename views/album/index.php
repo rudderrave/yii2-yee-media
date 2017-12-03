@@ -16,7 +16,7 @@ $this->title = Yii::t('yee/media', 'Albums');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('yee/media', 'Media'), 'url' => ['/media/default/index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-$this->params['description'] = 'YeeCMS 0.2.0';
+$this->params['description'] = 'List of media albums';
 $this->params['header-content'] = Html::a(Yii::t('yee', 'Add New'), ['create'], ['class' => 'btn btn-sm btn-primary']) . ' '
         . Html::a(Yii::t('yee/media', 'Manage Categories'), ['category/index'], ['class' => 'btn btn-sm btn-primary']);
 ?>

@@ -7,6 +7,8 @@ use yeesoft\controllers\CrudController;
 class DefaultController extends CrudController
 {
 
+    public $modelClass = 'yeesoft\media\models\Media';
+    public $modelSearchClass = 'yeesoft\media\models\MediaSearch';
     public $disabledActions = ['view', 'create', 'update', 'delete', 'toggle-attribute',
         'bulk-activate', 'bulk-deactivate', 'bulk-delete', 'grid-sort', 'grid-page-size'];
 

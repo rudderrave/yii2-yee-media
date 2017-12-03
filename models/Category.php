@@ -130,22 +130,4 @@ class Category extends ActiveRecord
         return new MultilingualQuery(get_called_class());
     }
 
-    /**
-     *
-     * @inheritdoc
-     */
-    public static function getFullAccessPermission()
-    {
-        return 'fullMediaCategoryAccess';
-    }
-
-    /**
-     *
-     * @inheritdoc
-     */
-    public static function getOwnerField()
-    {
-        return 'created_by';
-    }
-
 }

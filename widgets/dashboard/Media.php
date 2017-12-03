@@ -2,6 +2,7 @@
 
 namespace yeesoft\media\widgets\dashboard;
 
+use Yii;
 use yeesoft\media\models\Media as MediaModel;
 use yeesoft\models\User;
 use yeesoft\widgets\DashboardWidget;
@@ -20,7 +21,7 @@ class Media extends DashboardWidget
 
     public function run()
     {
-        if (User::hasPermission('viewMedia')) {
+        if (Yii::$app->user->can('view-media')) {
             $recent = MediaModel::find()->orderBy(['id' => SORT_DESC])->limit($this->recentLimit)->all();
 
             return $this->render('media',

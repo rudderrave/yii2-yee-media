@@ -54,7 +54,7 @@ FormLanguageSwitcherAsset::register($this);
                                         ])
                                 ?>
                             </td>
-                            <?php if (User::hasPermission('uploadMedia')): ?>
+                            <?php if (Yii::$app->user->can('upload-media')): ?>
                                 <td style="width: 1%;">
                                     <?= Html::a(Yii::t('yee/media', 'Upload New File'), ($mode == 'modal') ? ['/media/manage/uploader', 'mode' => 'modal'] : ['/media/manage/uploader'], ['class' => 'btn btn-primary pull-right']) ?>
                                 </td>

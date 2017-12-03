@@ -114,7 +114,7 @@ class ManageController extends CrudController
         $model = Media::findOne(["{$tableName}.id" => $id]);
         $message = Yii::t('yee/media', "Changes haven't been saved.");
 
-        if (User::hasPermission('editMedia')) {
+        if (Yii::$app->user->can('edit-media')) {
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 $message = Yii::t('yee/media', "Changes have been saved.");
             }
@@ -147,7 +147,7 @@ class ManageController extends CrudController
          */
         $model = Media::findOne(["{$tableName}.id" => $id]);
 
-        if (User::hasPermission('deleteMedia')) {
+        if (Yii::$app->user->can('delete-media')) {
             if ($model->isImage()) {
                 $model->deleteThumbs($routes);
             }

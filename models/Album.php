@@ -154,22 +154,4 @@ class Album extends ActiveRecord
         return new MultilingualQuery(get_called_class());
     }
 
-    /**
-     *
-     * @inheritdoc
-     */
-    public static function getFullAccessPermission()
-    {
-        return 'fullMediaAlbumAccess';
-    }
-
-    /**
-     *
-     * @inheritdoc
-     */
-    public static function getOwnerField()
-    {
-        return 'created_by';
-    }
-
 }

@@ -68,7 +68,7 @@ $form = ActiveForm::begin([
 
 <?php if ($mode !== 'modal'): ?>
 
-    <?php if (User::hasPermission('editMedia')): ?>
+    <?php if (Yii::$app->user->can('edit-media')): ?>
         <?= $form->field($model, 'album_id')->dropDownList(ArrayHelper::merge([NULL => Yii::t('yee', 'Not Selected')], Album::getAlbums(true, true))) ?>
         <?= $form->field($model, 'title')->textInput(['class' => 'form-control input-sm']); ?>
     <?php else: ?>
@@ -79,7 +79,7 @@ $form = ActiveForm::begin([
 <?php endif; ?>
 
 <?php if ($model->isImage()) : ?>
-    <?php if (User::hasPermission('editMedia')): ?>
+    <?php if (Yii::$app->user->can('edit-media')): ?>
         <?= $form->field($model, 'alt')->textInput(['class' => 'form-control input-sm']); ?>
     <?php else: ?>
         <?= $form->field($model, 'alt')->textInput(['class' => 'form-control input-sm', 'readonly' => 'readonly']); ?>
@@ -87,7 +87,7 @@ $form = ActiveForm::begin([
 <?php endif; ?>
 
 <?php if ($mode !== 'modal'): ?>
-    <?php if (User::hasPermission('editMedia')): ?>
+    <?php if (Yii::$app->user->can('edit-media')): ?>
         <?= $form->field($model, 'description')->textarea(['class' => 'form-control input-sm']); ?>
     <?php else: ?>
         <?= $form->field($model, 'description')->textarea(['class' => 'form-control input-sm', 'readonly' => 'readonly']); ?>
@@ -106,7 +106,7 @@ $form = ActiveForm::begin([
 
 <?= Html::hiddenInput('id', $model->id) ?>
 
-<?php if (User::hasPermission('editMedia') && ($mode != 'modal')): ?>
+<?php if (Yii::$app->user->can('edit-media') && ($mode != 'modal')): ?>
     <?= Html::submitButton(Yii::t('yee', 'Save'), ['class' => 'btn btn-primary']) ?>
 <?php endif; ?>
 

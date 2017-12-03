@@ -466,24 +466,6 @@ class Media extends ActiveRecord
         return new MultilingualQuery(get_called_class());
     }
 
-    /**
-     *
-     * @inheritdoc
-     */
-    public static function getFullAccessPermission()
-    {
-        return 'fullMediaAccess';
-    }
-
-    /**
-     *
-     * @inheritdoc
-     */
-    public static function getOwnerField()
-    {
-        return 'created_by';
-    }
-
     public function getAlbum()
     {
         return $this->hasOne(Album::className(), ['id' => 'album_id']);
