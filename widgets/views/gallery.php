@@ -3,7 +3,6 @@
 use yeesoft\helpers\Html;
 use yeesoft\media\assets\MediaAsset;
 use yeesoft\media\models\Album;
-use yeesoft\models\User;
 use yii\grid\GridViewAsset;
 use yii\helpers\Url;
 use yii\jui\DatePicker;
@@ -13,7 +12,7 @@ use yeesoft\multilingual\assets\FormLanguageSwitcherAsset;
 
 /* @var $this yii\web\View */
 /* @var $searchModel yeesoft\media\models\Media */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $dataProvider yeesoft\data\ActiveDataProvider */
 
 MediaAsset::register($this);
 GridViewAsset::register($this);

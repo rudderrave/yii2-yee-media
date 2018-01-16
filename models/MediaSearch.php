@@ -3,7 +3,7 @@
 namespace yeesoft\media\models;
 
 use yii\base\Model;
-use yii\data\ActiveDataProvider;
+use yeesoft\data\ActiveDataProvider;
 
 /**
  * MediaSearch represents the model behind the search form about `yeesoft\media\models\Media`.

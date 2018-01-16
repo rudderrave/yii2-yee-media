@@ -4,7 +4,7 @@ namespace yeesoft\media\models;
 
 use Yii;
 use yii\base\Model;
-use yii\data\ActiveDataProvider;
+use yeesoft\data\ActiveDataProvider;
 
 /**
  * AlbumSearch represents the model behind the search form about `yeesoft\media\models\Album`.

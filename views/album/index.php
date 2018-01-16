@@ -1,16 +1,14 @@
 <?php
 
-use yeesoft\grid\GridPageSize;
-use yeesoft\grid\GridView;
+use yii\widgets\Pjax;
 use yeesoft\helpers\Html;
+use yeesoft\grid\GridView;
 use yeesoft\media\models\Album;
 use yeesoft\media\models\Category;
-use yii\helpers\Url;
-use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel yeesoft\media\models\AlbumSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $dataProvider yeesoft\data\ActiveDataProvider */
 
 $this->title = Yii::t('yee/media', 'Albums');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('yee/media', 'Media'), 'url' => ['/media/default/index']];

@@ -7,7 +7,7 @@ use yeesoft\media\models\Category;
 
 /* @var $this yii\web\View */
 /* @var $searchModel yeesoft\media\CategorySearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $dataProvider yeesoft\data\ActiveDataProvider */
 
 $this->title = Yii::t('yee/media', 'Categories');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('yee/media', 'Media'), 'url' => ['default/index']];
