@@ -153,7 +153,7 @@ class FileInput extends InputWidget
             );
         }
 
-        $modal = $this->renderFile('@vendor/yeesoft/yii2-yee-media/views/manage/modal.php', [
+        $modal = $this->renderFile('@vendor/rudderrave/yii2-yee-media/views/manage/modal.php', [
             'inputId' => $this->options['id'],
             'btnId' => $this->buttonOptions['id'],
             'frameId' => $this->options['id'] . '-frame',
