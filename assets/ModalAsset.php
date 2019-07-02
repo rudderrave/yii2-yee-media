@@ -6,7 +6,7 @@ use yii\web\AssetBundle;
 
 class ModalAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/yeesoft/yii2-yee-media/assets/source';
+    public $sourcePath = '@vendor/rudderrave/yii2-yee-media/assets/source';
     public $css = [
         'css/modal.css',
     ];
