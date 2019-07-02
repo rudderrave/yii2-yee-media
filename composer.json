@@ -1,18 +1,18 @@
 {
-  "name": "yeesoft/yii2-yee-media",
-  "description": "Media Module For Yee CMS",
+  "name": "rudderrave/yii2-yee-media",
+  "description": "Media Module",
   "license": "Apache-2.0",
   "authors": [
     {
-      "name": "Taras Makitra",
-      "email": "makitrataras@gmail.com"
+      "name": "Rave",
+      "email": "rudder.rave@gmail.com"
     }
   ],
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
     "yiisoft/yii2-imagine": "~2.1",
-    "yeesoft/yii2-yee-core": "~0.1.0",
+    "rudderrave/yii2-yee-core-rest": "dev-master",
     "tinymce/tinymce": "~4.5.0",
     "2amigos/yii2-file-upload-widget": "~1.0.6"
   },

@@ -1,6 +1,4 @@
-# yii2-yee-media
-
-##Yee CMS - Media Module
+##Media Module
 
 ####Backend module for managing media files 
 
@@ -14,13 +12,13 @@ Installation
 - Either run
 
 ```
-composer require --prefer-dist yeesoft/yii2-yee-media "~0.1.0"
+composer require --prefer-dist rudderrave/yii2-yee-media "dev-master"
 ```
 
 or add
 
 ```
-"yeesoft/yii2-yee-media": "~0.1.0"
+"rudderrave/yii2-yee-media": "dev-master"
 ```
 
 to the require section of your `composer.json` file.
@@ -28,7 +26,7 @@ to the require section of your `composer.json` file.
 - Run migrations
 
 ```php
-yii migrate --migrationPath=@vendor/yeesoft/yii2-yee-media/migrations/
+yii migrate --migrationPath=@vendor/rudderrave/yii2-yee-media/migrations/
 ```
 
 Configuration
@@ -58,8 +56,3 @@ Add this code in your control panel dashboard to display widget:
 ```php
 echo \yeesoft\media\widgets\dashboard\Media::widget();
 ```
-
-Screenshots
--------  
-
-[Flickr - Yee CMS Media Module](https://www.flickr.com/photos/134050409@N07/sets/72157656737020391)

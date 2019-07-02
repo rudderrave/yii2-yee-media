@@ -40,7 +40,7 @@ class ManageController extends BaseController
 
     public function actionIndex()
     {
-        $this->layout = '@vendor/yeesoft/yii2-yee-media/views/layouts/main';
+        $this->layout = '@vendor/rudderrave/yii2-yee-media/views/layouts/main';
 
         return $this->render('index');
     }
@@ -50,7 +50,7 @@ class ManageController extends BaseController
         $mode = Yii::$app->getRequest()->get('mode', 'normal');
 
         if ($mode == 'modal') {
-            $this->layout = '@vendor/yeesoft/yii2-yee-media/views/layouts/main';
+            $this->layout = '@vendor/rudderrave/yii2-yee-media/views/layouts/main';
         }
 
         return $this->render('uploader', [
